@@ -37,7 +37,9 @@ dependencies {
 
     // ViewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
-
+    implementation 'com.google.android.material:material:1.0.0-alpha1'
     implementation 'com.jakewharton:butterknife:10.2.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
+
+
 }
