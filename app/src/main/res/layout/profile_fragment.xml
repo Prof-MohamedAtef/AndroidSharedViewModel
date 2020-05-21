@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:id="@+id/scrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#FFF">
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@color/colorAccent"
+        tools:layout_editor_absoluteX="96dp"
+        tools:layout_editor_absoluteY="81dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_pic"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/me"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="215dp"
+        android:layout_marginStart="30dp"
+        app:layout_constraintBottom_toBottomOf="@id/imageView2"
+        app:layout_constraintTop_toBottomOf="@id/imageView2"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/txt_userName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="User Name :"
+        android:textSize="16sp"
+        android:textColor="#000"
+        android:textStyle="bold"
+        android:layout_marginTop="60dp"
+        app:layout_constraintTop_toBottomOf="@id/profile_pic"
+        app:layout_constraintStart_toEndOf="@id/profile_pic"/>
+    <EditText
+        android:id="@+id/edit_userName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Enter Name"
+        android:textSize="16sp"
+        android:textColor="#000"
+        android:textStyle="bold"
+        app:layout_constraintBaseline_toBaselineOf="@id/txt_userName"
+        app:layout_constraintStart_toEndOf="@id/txt_userName"
+        android:layout_marginStart="5dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Position :"
+        android:id="@+id/txt_position"
+        android:textSize="16sp"
+        android:textColor="#000"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/txt_userName"
+        app:layout_constraintStart_toEndOf="@id/profile_pic"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="25dp"/>
+    <EditText
+        android:id="@+id/edit_position"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Enter Job Title"
+        android:textSize="16sp"
+        android:textColor="#000"
+        android:textStyle="bold"
+        app:layout_constraintBaseline_toBaselineOf="@id/txt_position"
+        app:layout_constraintStart_toStartOf="@id/edit_userName" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Address :"
+        android:id="@+id/txt_address"
+        android:textSize="16sp"
+        android:textColor="#000"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/txt_position"
+        app:layout_constraintStart_toEndOf="@id/profile_pic"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="25dp"/>
+    <EditText
+        android:id="@+id/edit_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Enter Address"
+        android:textSize="16sp"
+        android:textColor="#000"
+        android:textStyle="bold"
+        app:layout_constraintBaseline_toBaselineOf="@id/txt_address"
+        app:layout_constraintStart_toStartOf="@id/edit_position" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Distance :"
+        android:id="@+id/txt_distance"
+        android:textSize="16sp"
+        android:textColor="#000"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/txt_address"
+        app:layout_constraintStart_toEndOf="@id/profile_pic"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="25dp"/>
+    <EditText
+        android:id="@+id/edit_distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Enter Distance"
+        android:textSize="16sp"
+        android:textColor="#000"
+        android:textStyle="bold"
+        app:layout_constraintBaseline_toBaselineOf="@id/txt_distance"
+        app:layout_constraintStart_toStartOf="@id/edit_address" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Time :"
+        android:id="@+id/txt_time"
+        android:textSize="16sp"
+        android:textColor="#000"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/txt_distance"
+        app:layout_constraintStart_toEndOf="@id/profile_pic"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="25dp"/>
+    <EditText
+        android:id="@+id/edit_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Enter Time"
+        android:textSize="16sp"
+        android:textColor="#000"
+        android:textStyle="bold"
+        app:layout_constraintBaseline_toBaselineOf="@id/txt_time"
+        app:layout_constraintStart_toStartOf="@id/edit_distance" />
+
+    <Button
+        android:id="@+id/btn_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:padding="10dp"
+        android:background="@drawable/verify_code_btn_shape"
+        style="@style/ButtonText"
+        android:textAllCaps="false"
+        app:layout_constraintTop_toBottomOf="@+id/edit_time"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        app:layout_constraintTop_toBottomOf="@id/btn_submit"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
