@@ -1,10 +1,13 @@
-package mo.ed.aad.fragmentssharedviewmodel.mvvm;
+package mo.ed.aad.fragmentssharedviewmodel.mvvm.dao;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.paging.DataSource;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.RawQuery;
+import androidx.sqlite.db.SupportSQLiteQuery;
 
 import java.util.List;
 import mo.ed.aad.fragmentssharedviewmodel.mvvm.model.Profile;
@@ -30,6 +33,16 @@ public interface ProfileDao {
     @Query("SELECT * From Profiles")
     LiveData<List<Profile>> getAllProfiles();
 
+    @Query("SELECT * FROM Profiles")
+    DataSource.Factory<Integer, Profile> getAllProfilesPaged();
+
 
     // TODO: 5/21/20      @RawQuery()
+
+    @RawQuery(observedEntities = Profile.class)
+    LiveData<List<Profile>> getMutableList(SupportSQLiteQuery query);
+
+    //for paging
+    @RawQuery(observedEntities = Profile.class)
+    DataSource.Factory<Integer, Profile> getPagedList(SupportSQLiteQuery query);
 }

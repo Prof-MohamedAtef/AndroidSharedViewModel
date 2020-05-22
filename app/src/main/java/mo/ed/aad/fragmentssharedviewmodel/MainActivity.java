@@ -24,6 +24,7 @@ import mo.ed.aad.fragmentssharedviewmodel.fragment.FragmentA;
 import mo.ed.aad.fragmentssharedviewmodel.fragment.FragmentB;
 import mo.ed.aad.fragmentssharedviewmodel.fragment.HomeFragment;
 import mo.ed.aad.fragmentssharedviewmodel.fragment.ProfileFragment;
+import mo.ed.aad.fragmentssharedviewmodel.fragment.ProfilesListFragment;
 
 public class MainActivity extends AppCompatActivity implements  NavigationView.OnNavigationItemSelectedListener {
 
@@ -46,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragments_container, new HomeFragment()).commit();
                 return true;
             case R.id.navigation_sessions:
-//                getSupportFragmentManager().beginTransaction().replace(R.id.fragments_container, new SessionsFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragments_container, new ProfilesListFragment()).commit();
                 return true;
             case R.id.navigation_profile:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragments_container, new ProfileFragment()).commit();

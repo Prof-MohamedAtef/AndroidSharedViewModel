@@ -30,15 +30,31 @@ public class Profile {
     @ColumnInfo(name = "Distance")
     public String Distance;
 
-    @Ignore
-    public Profile(@NonNull String userName, @NonNull String jobTitle, @NonNull String time, @NonNull String distance) {
-        UserName = userName;
-        JobTitle = jobTitle;
-        Time = time;
-        Distance = distance;
-    }
+    @NonNull
+    @ColumnInfo(name = "Address")
+    public String Address;
+
+
 
     public Profile() {
+    }
+
+    @NonNull
+    public String getAddress() {
+        return Address;
+    }
+
+    public void setAddress(@NonNull String address) {
+        Address = address;
+    }
+
+    @Ignore
+    public Profile(String userName, String jobTitle, String address, String distance, String time) {
+        UserName=userName;
+        JobTitle=jobTitle;
+        Address=address;
+        Distance=distance;
+        Time=time;
     }
 
     public int getProfileID() {
