@@ -6,8 +6,10 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
 @Entity(tableName = "Profiles")
-public class Profile {
+public class Profile implements Serializable {
 
     @NonNull
     @PrimaryKey(autoGenerate = true)

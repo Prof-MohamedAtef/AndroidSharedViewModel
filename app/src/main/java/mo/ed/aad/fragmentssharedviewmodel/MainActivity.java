@@ -10,6 +10,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,13 +21,16 @@ import com.google.android.material.navigation.NavigationView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import mo.ed.aad.fragmentssharedviewmodel.adapters.NavPanelListAdapter;
+import mo.ed.aad.fragmentssharedviewmodel.adapters.PagedProfilesListAdapter;
 import mo.ed.aad.fragmentssharedviewmodel.fragment.FragmentA;
 import mo.ed.aad.fragmentssharedviewmodel.fragment.FragmentB;
 import mo.ed.aad.fragmentssharedviewmodel.fragment.HomeFragment;
+import mo.ed.aad.fragmentssharedviewmodel.fragment.ProfileDetailFragment;
 import mo.ed.aad.fragmentssharedviewmodel.fragment.ProfileFragment;
 import mo.ed.aad.fragmentssharedviewmodel.fragment.ProfilesListFragment;
+import mo.ed.aad.fragmentssharedviewmodel.mvvm.model.Profile;
 
-public class MainActivity extends AppCompatActivity implements  NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements  NavigationView.OnNavigationItemSelectedListener , PagedProfilesListAdapter.InflateFragmentsListener {
 
     @BindView(R.id.app_bar)
     Toolbar toolbar;
@@ -41,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
             = item -> {
         switch (item.getItemId()) {
             case R.id.navigation_Chat:
-//                getSupportFragmentManager().beginTransaction().replace(R.id.fragments_container, new ChatFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragments_container, new ProfileDetailFragment()).commit();
                 return true;
             case R.id.navigation_home:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragments_container, new HomeFragment()).commit();
@@ -150,5 +154,17 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         return false;
+    }
+
+    @Override
+    public void ProfileDetailFragmentLaunch(Bundle bundle, String image, View imageView, String text, View textView) {
+        ProfileDetailFragment profileDetailFragment=new ProfileDetailFragment();
+        profileDetailFragment.setArguments(bundle);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragments_container, profileDetailFragment)
+                .addToBackStack("profileDetails")
+                .addSharedElement(imageView,image)
+                .addSharedElement(textView, text)
+                .commit();
     }
 }

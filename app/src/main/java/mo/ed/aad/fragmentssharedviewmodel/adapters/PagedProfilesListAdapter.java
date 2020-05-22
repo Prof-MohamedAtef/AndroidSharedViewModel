@@ -2,6 +2,9 @@ package mo.ed.aad.fragmentssharedviewmodel.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.Build;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,11 +19,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import de.hdodenhof.circleimageview.CircleImageView;
 import mo.ed.aad.fragmentssharedviewmodel.R;
 import mo.ed.aad.fragmentssharedviewmodel.mvvm.model.Profile;
 
 public class PagedProfilesListAdapter extends PagedListAdapter<Profile, PagedProfilesListAdapter.ProfileViewHolder> {
     private final Context mContext;
+    private String imageTransitionName;
+    private String textTransitionName;
+    private String IMAGE="image";
+    private String ACTION="text";
 
     public PagedProfilesListAdapter(Context context) {
         super(DIFF_CALLBACK);
@@ -45,11 +53,25 @@ public class PagedProfilesListAdapter extends PagedListAdapter<Profile, PagedPro
             holder.txt_distance_value.setText(profile.getDistance());
             holder.txt_time_value.setText(profile.getTime());
             holder.job_title.setText(profile.getJobTitle());
-
+            holder.profile_pic.setTransitionName(mContext.getString(R.string.animated_profile_pic)+position);
+            holder.txt_userName.setTransitionName(mContext.getString(R.string.animated_text)+position);
             holder.item_container.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(mContext, "Clicked position :  "+String.valueOf(position),Toast.LENGTH_LONG);
+                    imageTransitionName= holder.profile_pic.getTransitionName();
+                    textTransitionName=holder.txt_userName.getTransitionName();
+                    if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP){
+                        Bundle bundle=new Bundle();
+                        bundle.putString(IMAGE, imageTransitionName);
+                        bundle.putString(ACTION, textTransitionName);
+                        bundle.putSerializable("profileDetails", profile);
+                        bundle.putParcelable("imageBitmap", ((BitmapDrawable)holder.profile_pic.getDrawable()).getBitmap());
+                        ((InflateFragmentsListener)mContext).ProfileDetailFragmentLaunch(bundle, imageTransitionName,
+                                holder.profile_pic,
+                                textTransitionName,
+                                holder.txt_userName);
+                    }
                 }
             });
         }
@@ -62,6 +84,7 @@ public class PagedProfilesListAdapter extends PagedListAdapter<Profile, PagedPro
         @BindView(R.id.txt_distance_value) TextView txt_distance_value;
         @BindView(R.id.txt_time_value) TextView txt_time_value;
         @BindView(R.id.item_container) ConstraintLayout item_container;
+        @BindView(R.id.profile_pic) CircleImageView profile_pic;
 
         public ProfileViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -86,4 +109,9 @@ public class PagedProfilesListAdapter extends PagedListAdapter<Profile, PagedPro
                     return oldConcert.equals(newConcert);
                 }
             };
+
+
+    public interface InflateFragmentsListener {
+        public void ProfileDetailFragmentLaunch(Bundle bundle, String image, View imageView, String text, View textView);
+    }
 }
