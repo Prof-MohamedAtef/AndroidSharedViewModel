@@ -3,7 +3,7 @@
     <string name="home">Home</string>
     <string name="chat">Chat</string>
     <string name="sessions">Sessions</string>
-    <string name="profile" >Profile</string>
+    <string name="profile">Profile</string>
     <string name="locations">Locations</string>
     <string name="notifications">Notifications</string>
     <string name="account">Account</string>
@@ -19,4 +19,6 @@
     <string name="notsuccess">not successful!</string>
     <string name="success">Inserted Successfully</string>
     <string name="profiles">Profiles</string>
+    <string name="animated_profile_pic">animatedProfilePic</string>
+    <string name="animated_text">AnimatedText</string>
 </resources>

@@ -1,13 +1,18 @@
 package mo.ed.aad.fragmentssharedviewmodel.fragment;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.transition.TransitionInflater;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -23,6 +28,9 @@ import mo.ed.aad.fragmentssharedviewmodel.mvvm.room.AppDatabaseInitializer;
 import mo.ed.aad.fragmentssharedviewmodel.mvvm.room.roomHelper.InsertAsyncTask;
 
 public class ProfileFragment extends Fragment implements InsertAsyncTask.InsertProfile {
+
+    @BindView(R.id.profile_pic)
+    ImageView profile_pic;
 
     @BindView(R.id.edit_userName)
     EditText edit_userName;
@@ -43,6 +51,8 @@ public class ProfileFragment extends Fragment implements InsertAsyncTask.InsertP
     @BindView(R.id.btn_submit)
     Button btn_submit;
     private AppDatabase appDatabase;
+    private static String IMAGE="Image";
+    private static String ACTION="Text";
 
 
     @Override
@@ -110,10 +120,34 @@ public class ProfileFragment extends Fragment implements InsertAsyncTask.InsertP
     @Override
     public void onProfileInsertedSuccessful(Profile profile) {
         btn_submit.setEnabled(true);
+
         Toast.makeText(getActivity(), getResources().getString(R.string.success), Toast.LENGTH_SHORT).show();
+        HomeFragment homeFragment=new HomeFragment();
+
+        if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP){
+
+            setSharedElementReturnTransition(TransitionInflater.from(getActivity())
+                    .inflateTransition(R.transition.change_image_trans));
+            setExitTransition(TransitionInflater.from(getActivity()).inflateTransition(android.R.transition.fade));
+
+            homeFragment.setSharedElementEnterTransition(TransitionInflater.from(getActivity())
+            .inflateTransition(R.transition.change_image_trans));
+
+            homeFragment.setEnterTransition(TransitionInflater.from(getActivity()).inflateTransition(
+                    android.R.transition.fade
+            ));
+        }
+
+        Bundle bundle=new Bundle();
+        bundle.putParcelable(IMAGE, ((BitmapDrawable)profile_pic.getDrawable()).getBitmap());
+        bundle.putString(ACTION, edit_userName.getText().toString());
+        homeFragment.setArguments(bundle);
         getActivity().getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.fragments_container, new HomeFragment()).commit();
+                .replace(R.id.fragments_container, homeFragment )
+                .addToBackStack("Home")
+                .addSharedElement(profile_pic,getString(R.string.animated_profile_pic))
+                .commit();
     }
 
     @Override

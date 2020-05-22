@@ -22,9 +22,10 @@
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <de.hdodenhof.circleimageview.CircleImageView
+        android:transitionName="@string/animated_profile_pic"
         android:id="@+id/profile_pic"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:src="@drawable/me"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="215dp"
