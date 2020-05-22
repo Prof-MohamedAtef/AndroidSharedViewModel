@@ -210,7 +210,7 @@ public class MainActivityTest4 {
         textView.check(matches(withText("sdff")));
     }
 
-    private static Matcher<View> childAtPosition(
+    public static Matcher<View> childAtPosition(
             final Matcher<View> parentMatcher, final int position) {
 
         return new TypeSafeMatcher<View>() {

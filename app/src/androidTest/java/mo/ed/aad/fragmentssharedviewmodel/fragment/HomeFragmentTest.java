@@ -58,5 +58,4 @@ public class HomeFragmentTest {
         onView(withId(R.id.txt_like)).check(matches(isClickable()));
         ViewInteraction donate=onView(withId(R.id.txt_donate)).check(matches(allOf(withText("Donate"),isDisplayed())));
     }
-
 }

@@ -6,8 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
@@ -43,6 +45,13 @@ public class PagedProfilesListAdapter extends PagedListAdapter<Profile, PagedPro
             holder.txt_distance_value.setText(profile.getDistance());
             holder.txt_time_value.setText(profile.getTime());
             holder.job_title.setText(profile.getJobTitle());
+
+            holder.item_container.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(mContext, "Clicked position :  "+String.valueOf(position),Toast.LENGTH_LONG);
+                }
+            });
         }
     }
 
@@ -52,6 +61,7 @@ public class PagedProfilesListAdapter extends PagedListAdapter<Profile, PagedPro
         @BindView(R.id.txt_address) TextView txt_address;
         @BindView(R.id.txt_distance_value) TextView txt_distance_value;
         @BindView(R.id.txt_time_value) TextView txt_time_value;
+        @BindView(R.id.item_container) ConstraintLayout item_container;
 
         public ProfileViewHolder(@NonNull View itemView) {
             super(itemView);
