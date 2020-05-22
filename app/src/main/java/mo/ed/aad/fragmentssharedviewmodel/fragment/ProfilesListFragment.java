@@ -52,7 +52,7 @@ public class ProfilesListFragment extends Fragment {
 
         // query for rawQuery
         SimpleSQLiteQuery query =new SimpleSQLiteQuery("SELECT * FROM Profiles");
-        profileSharedViewModel.getPagedProfilesListRawQuery(query).observe(this, new Observer<PagedList<Profile>>() {
+        profileSharedViewModel.getPagedProfilesListRawQuery(query).observe(getViewLifecycleOwner(), new Observer<PagedList<Profile>>() {
             @Override
             public void onChanged(PagedList<Profile> profiles) {
                 if (profiles!=null){
